@@ -64,7 +64,11 @@ class MonteCarloTreeSearchNode(ABC):
         ]
         return self.children[np.argmax(choices_weights)]
 
-    def rollout_policy(self, possible_moves):        
+    # In AlphaGo, this was based on supervised learning, not random selection;
+    # AlphaGoZero doesn't have this stage at all, and only has a tree to a certain depth. 
+    # Neural network is basically envouraged to be "more consistent" with itself, and predict better probabilities.
+    # (The probabilities take into account predicted value, BUT ALSO predicted values from children
+    def rollout_policy(self, possible_moves): 
         return possible_moves[np.random.randint(len(possible_moves))]
 
 
